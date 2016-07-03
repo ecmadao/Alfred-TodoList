@@ -14,4 +14,4 @@ python(< 3)
 
 ### Install
 
-download the release package, double click to open it.
+download the [release package](https://github.com/ecmadao/Alfred-TodoList/releases), double click to open it.

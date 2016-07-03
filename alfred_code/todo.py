@@ -3,7 +3,7 @@ import sys
 import re
 import alfred
 from workflow import Workflow
-from file import read_files, SPLIT, FILES
+from file import read_files, SPLIT, get_files
 
 
 def filter_items(arg):
@@ -31,8 +31,9 @@ def todo(wf):
 			todo_items.append(alfred_item)
 	
 	if len(todo_items) == 0:
-		for filename in FILES:
-			alfred_item = alfred.Item({'uid': 3, 'arg': '{filename}{split}{todo}{split}add'.format(filename=filename, split=SPLIT, todo=arg)}, filename, 'add new todo in todos/{}.md'.format(filename), ('new_todo.png', {'type': 'png'}))
+		for file_tuple in get_files().items():
+			filename, file_icon = file_tuple
+			alfred_item = alfred.Item({'uid': 3, 'arg': '{filename}{split}{todo}{split}add'.format(filename=filename, split=SPLIT, todo=arg)}, filename, 'add new todo in todos/{}.md'.format(filename), (file_icon, {'type': 'png'}))
 			todo_items.append(alfred_item)
 
 	alfred.write(alfred.xml(todo_items))

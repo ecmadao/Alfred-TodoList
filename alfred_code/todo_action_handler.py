@@ -3,7 +3,7 @@ import sys
 import re
 import alfred
 from workflow import Workflow
-from file import todo_actions, SPLIT, ACTIONS
+from file import todo_actions, SPLIT, get_actions
 
 
 def todo_action_handler(wf):
@@ -19,8 +19,9 @@ def todo_action_handler(wf):
 		sys.exit(0)
 	else:
 		todo_actions_list = []
-		for action in ACTIONS:
-			alfred_item = alfred.Item({'uid': 4, 'arg': '{filename}{split}{todo}{split}{action}'.format(filename=filename, split=SPLIT, todo=todo, action=action)}, action, '{action} this todo in todos/{filename}.md'.format(action=action, filename=filename), ('new_todo.png', {'type': 'png'}))
+		for actions in get_actions().items():
+			action, action_icon = actions
+			alfred_item = alfred.Item({'uid': 4, 'arg': '{filename}{split}{todo}{split}{action}'.format(filename=filename, split=SPLIT, todo=todo, action=action)}, action, '{action} this todo in todos/{filename}.md'.format(action=action, filename=filename), (action_icon, {'type': 'png'}))
 			todo_actions_list.append(alfred_item)
 		alfred.write(alfred.xml(todo_actions_list))	
 	wf.send_feedback()

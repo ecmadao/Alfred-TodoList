@@ -9,6 +9,14 @@ SPLIT = '/'
 ACTIONS = ('complete', 'delete')
 
 
+def get_files():
+	return {key: 'icons/file_{}.png'.format(key) for key in FILES}
+
+
+def get_actions():
+	return {key: 'icons/todo_{}.png'.format(key) for key in ACTIONS}
+
+
 def read_files():
 	all_items = {}
 	files = [x for x in os.listdir('todos') if os.path.splitext(x)[1] == '.md']

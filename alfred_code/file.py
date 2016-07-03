@@ -1,6 +1,10 @@
 # -*- coding: UTF-8 -*-
 import os
 import re
+import sys
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 FILES= ('learn', 'work', 'life', 'others')
 

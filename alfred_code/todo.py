@@ -1,9 +1,12 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 import sys
 import re
 import alfred
 from workflow import Workflow
 from file import read_files, SPLIT, get_files
+
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 def filter_items(arg):

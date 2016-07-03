@@ -5,6 +5,9 @@ import alfred
 from workflow import Workflow
 from file import todo_actions, SPLIT, get_actions
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 def todo_action_handler(wf):
 	if len(wf.args):

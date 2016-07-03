@@ -33,3 +33,9 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 **then chose a todo to delete/complete it**
 
 ![todo-option](image/todo-option.png)
+
+### TODO
+
+- bugfix(try/catch)
+- do not search completed todo
+- change todo from one file to another file

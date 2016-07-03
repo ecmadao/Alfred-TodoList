@@ -37,7 +37,7 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 ### TODO
 
 - bugfix(try/catch)
-- do not search completed todo
+- ~~do not search completed todo~~
 - change todo from one file to another file
 
 ### License

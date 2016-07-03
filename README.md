@@ -15,3 +15,21 @@ python(< 3)
 ### Install
 
 download the [release package](https://github.com/ecmadao/Alfred-TodoList/releases), double click to open it.
+
+### Usage
+
+**use "todo" hotkey to wakeup the action**
+
+![todo](image/todo.png)
+
+**press "enter", then input something, chose a filename to record a new todo**
+
+![todo-new](image/todo-new.png)
+
+**to seach a todo, you only need to input something just list the pre-steps**
+
+![todo-search](image/todo-search.png)
+
+**then chose a todo to delete/complete it**
+
+![todo-option](image/todo-option.png)

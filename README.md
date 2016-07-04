@@ -18,15 +18,15 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 
 ### Usage
 
-**use "todo" hotkey to wakeup the action**
+**use "todo" hotkey to wakeup the action -- add new todo or search existed todos**
 
 ![todo](image/todo.png)
 
-**press "enter", then input something, chose a filename to record a new todo**
+**press "new todo", then input something, chose a filename to record a new todo**
 
 ![todo-new](image/todo-new.png)
 
-**to seach a todo, you only need to input something just list the pre-steps**
+**to seach a todo, you only need to press "find"  just list the pre-step**
 
 ![todo-search](image/todo-search.png)
 
@@ -36,9 +36,12 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 
 ### TODO
 
-- bugfix(try/catch)
-- ~~do not search completed todo~~
-- change todo from one file to another file
+- [x] ~~bugfix(try/catch)~~
+- [x] ~~do not search completed todo~~
+- [ ] change todo from one file to another file
+- [ ] add new file to store todo
+- [ ] clear all completed todos
+- [ ] deal the situation when you wanna delete/complete todo in a file
 
 ### License
 

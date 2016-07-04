@@ -7,11 +7,15 @@ from random import randrange
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-SPLIT = '//'
+SPLIT = '->'
+
+
 
 files_obj = None
 
 actions_obj = None
+
+#ACTIONS = ('complete', 'delete')
 
 
 def todo_actions():
@@ -56,11 +60,6 @@ class TodoActions(object):
 	def get_default_icon():
 		default_icons = os.listdir('icons/default')
 		return 'icons/default/{}'.format(default_icons[randrange(0, len(default_icons))])
-	
-	@staticmethod
-	def write_todos(filename, todos):
-		with open('todos/{}.md'.format(filename), 'w') as f:
-			f.writelines(todos)
 
 	@staticmethod
 	def new_todo(filename, todo):
@@ -70,7 +69,7 @@ class TodoActions(object):
 	@staticmethod
 	def delete_todo(filename, todo):
 		with open('todos/{}.md'.format(filename), 'r') as f:
-			todo_lines = [line for line in f.readlines() if line.split('- ')[1].strip() != todo]
+			todo_lines = [line for line in f.readlines() if re.match(r'- ', line) and line.split('- ')[1].strip() != todo]
 		TodoActions.deal_todo_file(filename, todo_lines)
 
 	@staticmethod
@@ -78,25 +77,39 @@ class TodoActions(object):
 		with open('todos/{}.md'.format(filename), 'r') as f:
 			todo_lines = []
 			for line in f.readlines():
-				line_todo = line.split('- ')[1].strip()
-				if line_todo == todo:
-					line = '- ~~{}~~\n'.format(line_todo)
-				todo_lines.append(line)
+				if re.match(r'- ', line):
+					line_todo = line.split('- ')[1].strip()
+					if line_todo == todo:
+						line = '- ~~{}~~\n'.format(line_todo)
+					todo_lines.append(line)
 		TodoActions.deal_todo_file(filename, todo_lines)
 	
 	@staticmethod
 	def deal_todo_file(filename, todo_lines):
 		TodoActions.rename_file(filename)
-		TodoActions.write_todos(filename, todo_lines)
+		TodoActions.write_file(filename, todo_lines)
 		TodoActions.remove_file(filename)
 
-	@staticmethod
-	def todo_actions():
+	@property
+	def todo_actions(self):
 		return {
 			'complete': TodoActions.complete_todo,
 			'delete': TodoActions.delete_todo,
 			'add': TodoActions.new_todo
 		}
+
+#	@staticmethod
+#	def todo_actions():
+#		return {
+#			'complete': TodoActions.complete_todo,
+#			'delete': TodoActions.delete_todo,
+#			'add': TodoActions.new_todo
+#		}
+
+	@staticmethod
+	def write_file(filename, todos):
+		with open('todos/{}.md'.format(filename), 'w') as f:
+			f.writelines(todos)
 		
 	@staticmethod
 	def rename_file(filename):

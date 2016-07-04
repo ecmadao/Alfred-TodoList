@@ -9,10 +9,10 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-def todo_new(wf):
+def todo_delete(wf):
 	if len(wf.args):
 		try:
-			arg = re.findall(r'new: (.*)', ''.join(wf.args))[0]
+			arg = re.findall(r'delete? (.*)', ''.join(wf.args))[0]
 		except IndexError:
 			arg = ''
 	else:
@@ -36,4 +36,4 @@ def todo_new(wf):
 if __name__ == '__main__':
 	wf = Workflow3()
 	logger = wf.logger
-	sys.exit(wf.run(todo_new))
+	sys.exit(wf.run(todo_delete))

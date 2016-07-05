@@ -34,6 +34,11 @@ def todo_filter(wf):
 	
 
 if __name__ == '__main__':
-	wf = Workflow3()
+	wf = Workflow3(update_settings={
+		'github_slug': 'ecmadao/Alfred-TodoList',
+		'frequency': 4
+	})
 	logger = wf.logger
 	sys.exit(wf.run(todo_filter))
+	if wf.update_available:
+		wf.start_update()

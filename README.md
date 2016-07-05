@@ -40,9 +40,11 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 - [x] ~~do not search completed todo~~
 - [ ] change todo from one file to another file
 - [ ] add new file to store todo
-- [x] delete completed todo
-- [x] deal the situation when you wanna delete/complete todo in a file
+- [x] ~~delete completed todo~~
+- [x] ~~deal the situation when you wanna delete/complete todo in a file~~
 - [ ] upgrade speed
+- [ ] unittest
+- [x] auto update
 
 ### License
 

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
-import re
-import alfred
-from workflow import Workflow, Workflow3
+from workflow import Workflow3
 from file import SPLIT, todo_files
 
 reload(sys)
@@ -18,23 +16,31 @@ def todo(wf):
 	file_object = todo_files(arg)
 	file_items = file_object.files.items()
 	
-	todo_items = []
+	todo_items = 0
 	
 	for item in file_items:
 		filename, file_obj = item
+		todo_items += len(file_obj['todos'])
 		for todo in file_obj['todos']:
-			alfred_item = alfred.Item({'uid': 3, 'arg': '{filename}{split}{todo}{split}'.format(filename=filename, split=SPLIT, todo=todo)}, todo, filename, ('new_todo.png', {'type': 'png'}))
-			todo_items.append(alfred_item)
+			
+			wf.add_item(title=todo, 
+						subtitle=filename, 
+						arg='{filename}{split}{todo}{split}'.format(filename=filename, split=SPLIT, todo=todo),
+						icon='new_todo.png',
+						valid=True)
 	
-	if len(todo_items) == 0:
+	if todo_items == 0:
 	
 		for file_tuple in file_items:
 			filename, file_obj = file_tuple
 			file_icon = file_obj['icon']
-			alfred_item = alfred.Item({'uid': 3, 'arg': '{filename}{split}{todo}{split}add'.format(filename=filename, split=SPLIT, todo=arg)}, filename, 'add new todo in todos/{}.md'.format(filename), (file_icon, {'type': 'png'}))
-			todo_items.append(alfred_item)
+			
+			wf.add_item(title=filename, 
+						subtitle='add new todo in todos/{}.md'.format(filename), 
+						arg='{filename}{split}{todo}{split}add'.format(filename=filename, split=SPLIT, todo=arg),
+						icon=file_icon,
+						valid=True)
 
-	alfred.write(alfred.xml(todo_items))
 	wf.send_feedback()
 	
 

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import sys
 import re
-import alfred
 from workflow import Workflow3
 from file import SPLIT, todo_files
 
@@ -21,15 +20,15 @@ def todo_filter(wf):
 	file_object = todo_files(arg)
 	file_items = file_object.files.items()
 	
-	todo_items = []
-	
 	for item in file_items:
 		filename, file_obj = item
 		for todo in file_obj['todos']:
-			alfred_item = alfred.Item({'uid': 3, 'arg': '{filename}{split}{todo}'.format(filename=filename, split=SPLIT, todo=todo)}, todo, filename, ('new_todo.png', {'type': 'png'}))
-			todo_items.append(alfred_item)
+			wf.add_item(title=todo, 
+						subtitle=filename, 
+						arg='{filename}{split}{todo}'.format(filename=filename, split=SPLIT, todo=todo),
+						icon='new_todo.png',
+						valid=True)
 
-	alfred.write(alfred.xml(todo_items))
 	wf.send_feedback()
 	
 

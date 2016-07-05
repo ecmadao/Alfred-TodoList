@@ -8,8 +8,6 @@ python(< 3)
 
 ### Rely
 
-[alfred-python](https://github.com/nikipore/alfred-python)
-
 [alfred-workflow](https://github.com/deanishe/alfred-workflow)
 
 ### Install

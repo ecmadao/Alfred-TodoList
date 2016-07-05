@@ -2,7 +2,7 @@
 import sys
 import re
 import alfred
-from workflow import Workflow
+from workflow import Workflow3
 from file import SPLIT, todo_actions
 
 reload(sys)
@@ -34,6 +34,6 @@ def todo_new_action(wf):
 
 
 if __name__ == '__main__':
-	wf = Workflow()
+	wf = Workflow3()
 	logger = wf.logger
 	sys.exit(wf.run(todo_new_action))

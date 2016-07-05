@@ -2,14 +2,14 @@
 import sys
 import re
 import alfred
-from workflow import Workflow, Workflow3
+from workflow import Workflow3
 from file import SPLIT, todo_files
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-def todo_delete(wf):
+def todo_completed(wf):
 	if len(wf.args):
 		try:
 			arg = re.findall(r'delete? (.*)', ''.join(wf.args))[0]
@@ -36,4 +36,4 @@ def todo_delete(wf):
 if __name__ == '__main__':
 	wf = Workflow3()
 	logger = wf.logger
-	sys.exit(wf.run(todo_delete))
+	sys.exit(wf.run(todo_completed))

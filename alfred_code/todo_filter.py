@@ -2,7 +2,7 @@
 import sys
 import re
 import alfred
-from workflow import Workflow, Workflow3
+from workflow import Workflow3
 from file import SPLIT, todo_files
 
 reload(sys)

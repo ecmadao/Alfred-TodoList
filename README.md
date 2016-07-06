@@ -42,7 +42,9 @@ download the [release package](https://github.com/ecmadao/Alfred-TodoList/releas
 - [x] ~~deal the situation when you wanna delete/complete todo in a file~~
 - [ ] upgrade speed
 - [ ] unittest
-- [x] auto update
+- [x] ~~auto update~~
+- [x] ~~add time when create a todo~~
+- [x] ~~use re to avoid some bugs~~
 
 ### License
 

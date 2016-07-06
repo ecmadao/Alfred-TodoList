@@ -23,8 +23,12 @@ def todo_filter(wf):
 	for item in file_items:
 		filename, file_obj = item
 		for todo in file_obj['todos']:
+			if re.search(r'\[@(\d*.*)\]$', todo):
+				todo, todo_time = re.findall(r'(.+)\[@(.*)\]$', todo)[0]
+			else:
+				todo_time = 'has no record yet.'
 			wf.add_item(title=todo, 
-						subtitle=filename, 
+						subtitle='{filename} create at: {todo_time}'.format(filename=filename, todo_time=todo_time),
 						arg='{filename}{split}{todo}'.format(filename=filename, split=SPLIT, todo=todo),
 						icon='new_todo.png',
 						valid=True)

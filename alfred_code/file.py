@@ -12,6 +12,7 @@ SPLIT = '->'
 TIME_SPLIT = '@'
 
 TODO_HEADER = '- '
+ARCHIVE_TITLE = 'new archive: '
 
 files_obj = None
 
@@ -46,6 +47,13 @@ def get_default_icon():
 
 def get_time_now():
 	return str(datetime.now()).split('.')[0]
+	
+
+def create_new_archive(filename):
+	file_path = get_file_path(filename)
+	if not os.path.isfile(file_path):
+		with open(file_path, 'w') as f:
+			pass
 
 
 class TodoActions(object):

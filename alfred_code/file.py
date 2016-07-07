@@ -101,8 +101,9 @@ class TodoActions(object):
 			for line in f.readlines():
 				
 				line_todo = re.findall(r'^- (.*)\n$', line)[0]
-				if line_todo and re.match(r'{todo}\[?@?'.format(todo=todo), line_todo):
-					line = '{}~~{}~~\n'.format(TODO_HEADER, line_todo)
+				if line_todo:
+					if re.match(r'{todo}\[?@?'.format(todo=todo), line_todo):
+						line = '{}~~{}~~\n'.format(TODO_HEADER, line_todo)
 					todo_lines.append(line)
 
 		TodoActions.deal_todo_file(filename, todo_lines)

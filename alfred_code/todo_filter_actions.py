@@ -19,8 +19,7 @@ def todo_new_action(wf):
 		filename, todo = arg.split(SPLIT)
 		actions_obj = todo_files()
 
-		for actions in actions_obj.actions.items():
-			action_name, action_icon = actions
+		for action_name, action_icon in actions_obj.actions.items():
 
 			wf.add_item(title=action_name,
 						subtitle='{action} this todo in todos/{filename}.md'.format(action=action_name, filename=filename),

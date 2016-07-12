@@ -19,7 +19,7 @@ def todo_completed(wf):
 		arg = ''
 
 	file_object = todo_files(arg)
-	file_items = file_object.get_todo_files(complete=True).items()
+	file_items = file_object.get_todos(complete=True).items()
 
 	todo_items = []
 

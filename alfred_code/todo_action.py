@@ -14,7 +14,7 @@ def todo_action(args):
 		arg = ''
 
 	try:
-		filename, todo, action = arg.split(const_value.SPLIT)
+		filename, todo, action = arg.split(SPLIT)
 		actions_obj = todo_files()
 
 		if action:

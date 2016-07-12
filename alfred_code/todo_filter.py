@@ -19,10 +19,8 @@ def todo_filter(wf):
 		arg = ''
 
 	file_object = todo_files(arg)
-	file_items = file_object.files.items()
 
-	for item in file_items:
-		filename, file_obj = item
+	for filename, file_obj in file_object.todos.items():
 		for todo in file_obj['todos']:
 			if re.search(r'\[@(\d*.*)\]$', todo):
 				todo, todo_time = re.findall(r'(.+)\[@(.*)\]$', todo)[0]

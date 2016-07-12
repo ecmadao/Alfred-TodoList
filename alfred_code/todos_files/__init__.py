@@ -27,12 +27,13 @@ def get_time_now():
 
 class TodoFiles(object):
 
-	__slots__ = ['all_files', 'all_actions', '_argument']
+	__slots__ = ['all_todos', 'all_actions', '_argument', 'all_files']
 
 	def __init__(self, arg):
-		self.all_files = None
+		self.all_todos = None
 		self.all_actions = None
 		self._argument = arg
+		self.all_files = None
 
 	@property
 	def argument(self):
@@ -43,10 +44,10 @@ class TodoFiles(object):
 		self._argument = arg
 
 	@property
-	def files(self):
-		if self.all_files is None:
-			self.all_files = self.get_todo_files()
-		return self.all_files
+	def todos(self):
+		if self.all_todos is None:
+			self.all_todos = self.get_todos()
+		return self.all_todos
 
 	@property
 	def actions(self):
@@ -55,25 +56,39 @@ class TodoFiles(object):
 		return self.all_actions
 
 	@property
+	def files(self):
+		if self.all_files is None:
+			self.all_files = self.get_files()
+		return self.all_files
+
+	@property
 	def todo_actions(self):
 		return {
 			'complete': files_helper.complete_todo,
 			'delete': files_helper.delete_todo,
-			'add': TodoActions.new_todo
+			'add': self.new_todo
 		}
 
-	def get_todo_files(self, complete=None):
+	def get_todos(self, complete=None):
 		complete = False if complete is None else True
-		all_files = {}
+		all_todos = {}
 		for filename in files_helper.get_all_files():
 			file_todos = self.read_file(filename, complete)
 			filename = filename.split('.')[0]
 			icon_path = 'icons/file_{}.png'.format(filename)
-			file_icon = icon_path if os.path.isfile(icon_path) else get_default_icon()
-			all_files[filename] = {
+			file_icon = icon_path if os.path.isfile(icon_path) else todos_helper.get_default_icon()
+			all_todos[filename] = {
 				'icon': file_icon,
 				'todos': file_todos
 			}
+		return all_todos
+
+	def get_files(self):
+		all_files = {}
+		for filename in files_helper.get_all_files():
+			filename = filename.split('.')[0]
+			icon_path = 'icons/file_{}.png'.format(filename)
+			all_files[filename] = icon_path if os.path.isfile(icon_path) else todos_helper.get_default_icon()
 		return all_files
 
 	def read_file(self, filename, complete):
@@ -86,10 +101,9 @@ class TodoFiles(object):
 					items.append(filtered_item)
 		return items
 
-	@staticmethod
-	def new_todo(filename, todo):
+	def new_todo(self, filename, todo):
 		with open(files_helper.get_file_path(filename), 'a') as f:
-			if todo not in self.files[filename]['todos']:
+			if todo not in self.todos[filename]['todos']:
 				f.write('{todo_header}{todo}[{time_spilt}{todo_time}]\n'.format(todo_header=TODO_HEADER,
 				todo=todo,
 				time_spilt=TIME_SPLIT,

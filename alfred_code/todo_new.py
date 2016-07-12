@@ -14,16 +14,14 @@ def todo_new(wf):
 		try:
 			arg = re.findall(r'new: (.*)', ''.join(wf.args))[0]
 		except IndexError:
-			if arg != None then arg = arg else arg = ''
+			arg = arg if arg != None else ''
 	else:
 		arg = ''
 
 	file_object = todo_files(arg)
 	file_items = file_object.files.items()
 
-	for file_tuple in file_items:
-		filename, file_obj = file_tuple
-		file_icon = file_obj['icon']
+	for filename, file_icon in file_items:
 
 		wf.add_item(title=filename,
 					subtitle='add new todo in todos/{}.md'.format(filename),

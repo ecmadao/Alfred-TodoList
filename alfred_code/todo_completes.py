@@ -23,8 +23,7 @@ def todo_completed(wf):
 
 	todo_items = []
 
-	for item in file_items:
-		filename, file_obj = item
+	for filename, file_obj in file_items:
 		for todo in file_obj['todos']:
 
 			if re.search(r'\[@(\d*.*)\]$', todo):

@@ -23,6 +23,21 @@ def todo_files(arg=""):
 
 def get_time_now():
 	return str(datetime.now()).split('.')[0]
+	
+
+class DataGetter(object):
+	def __init__(self, fun):
+		self._fun = fun
+	
+	def __get__(self, instance, cls):
+		if instance is None:
+			return self
+		value = self._fun(instance)
+		setattr(instance, self._fun.__name__, value)
+		return value
+	
+	def __set__(self, instance, value):
+		self._fun(instance)
 
 
 class TodoFiles(object):
@@ -43,19 +58,19 @@ class TodoFiles(object):
 	def argument(self, arg):
 		self._argument = arg
 
-	@property
+	@DataGetter
 	def todos(self):
 		if self.all_todos is None:
 			self.all_todos = self.get_todos()
 		return self.all_todos
 
-	@property
+	@DataGetter
 	def actions(self):
 		if self.all_actions is None:
 			self.all_actions = todos_helper.get_todo_actions()
 		return self.all_actions
 
-	@property
+	@DataGetter
 	def files(self):
 		if self.all_files is None:
 			self.all_files = self.get_files()
